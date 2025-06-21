@@ -94,7 +94,6 @@ def register(dp: Dispatcher):
         last_signals = signals[-5:]  # останні 5
         msg = "🕓 Останні сигнали:\n"
 
-"
         for s in reversed(last_signals):
             msg += f"{s['timestamp']} | {s['symbol']} {s['direction']} @ {s['price']} | TF: {s['interval']} | 🎯 {s['probability']}%
 "
