@@ -92,7 +92,7 @@ def register(dp: Dispatcher):
             await message.answer("📭 Історія сигналів порожня.")
             return
         last_signals = signals[-5:]  # останні 5
-        msg = "🕓 Останні сигнали:
+        msg = "🕓 Останні сигнали:\n"
 
 "
         for s in reversed(last_signals):
