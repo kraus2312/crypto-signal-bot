@@ -6,9 +6,10 @@ import os
 
 @dp.message_handler(commands=["start", "menu"])
 async def start_signal(message: types.Message):
-    await message.answer("👋 Привіт! Я бот для криптосигналів.
-
-Щоб отримувати сигнали, натисни кнопку нижче 👇")
+    await message.answer(
+        "👋 Привіт! Я бот для криптосигналів.\n\n"
+        "Щоб отримувати сигнали, натисни кнопку нижче 👇"
+    )
     markup = ReplyKeyboardMarkup(resize_keyboard=True)
     markup.add(KeyboardButton("📈 Отримати сигнал"))
     markup.add(KeyboardButton("🕓 Історія сигналів"))
@@ -17,7 +18,7 @@ async def start_signal(message: types.Message):
 @dp.message_handler(lambda m: m.text == "🕓 Історія сигналів")
 async def show_history(message: types.Message):
     user_id = str(message.from_user.id)
-    path = f"database/users.json"
+    path = "database/users.json"
 
     if not os.path.exists(path):
         await message.answer("Історія відсутня.")
@@ -31,10 +32,11 @@ async def show_history(message: types.Message):
         return
 
     last_signals = data[user_id]["history"][-5:]
-    msg = "🕓 Останні сигнали:
-"
+    msg = "🕓 Останні сигнали:\n"
     for s in reversed(last_signals):
-        msg += f"{s['timestamp']} | {s['symbol']} {s['direction']} @ {s['price']} | TF: {s['interval']} | 🎯 {s['probability']}%
-"
+        msg += (
+            f"{s['timestamp']} | {s['symbol']} {s['direction']} @ {s['price']} | "
+            f"TF: {s['interval']} | 🎯 {s['probability']}%\n"
+        )
 
     await message.answer(msg)
