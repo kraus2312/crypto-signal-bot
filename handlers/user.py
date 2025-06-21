@@ -1,10 +1,6 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
-from keyboards.inline.subscribe import get_subscribe_keyboard
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
-from loader import dp, db
-from services import formatter, signals, signal_sender
-from aiogram.dispatcher.filters import Command
+from loader import dp
 import json
 import os
 
@@ -42,7 +38,3 @@ async def show_history(message: types.Message):
 "
 
     await message.answer(msg)
-
-def register(dp):
-    dp.register_message_handler(start_signal, commands=["start", "menu"])
-    dp.register_message_handler(show_history, lambda m: m.text == "🕓 Історія сигналів")
